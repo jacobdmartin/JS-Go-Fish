@@ -1,18 +1,10 @@
 class Bot extends Player {
-  constructor(number) {
-    this._number = number
+  constructor(name) {
+    super()
+    this._name = name
   }
 
-  number() {
-    this.number
+  name() {
+    return this._name
   }
-
-  // createBots(number) {
-  //   const times = x => f => {
-  //     for (i = 0, i == number, i++) {
-  //       new Bot
-  //       times (x - 1) (f)
-  //     }
-  //   }
-  // }
 }

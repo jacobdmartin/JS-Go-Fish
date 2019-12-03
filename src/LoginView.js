@@ -3,42 +3,42 @@ class LoginView {
     this._startGame = startGame
   }
 
-  startGame() {
-    this.startGame
-  }
-
   draw(container) {
-    return container.innerHTML = this.markup()
-  }
-
-  submit() {
-    const name = document.getElementById('Name').value()
-    const playerNum = document.getElementById('PlayerNum').value()
-    const form = document.getElementsByName('formClass').submit()
-    return this.startGame(name, playerNum)
+    container.innerHTML = this.markup()
+    this.loggedIn()
   }
 
   loggedIn(container) {
-    const name = document.getElementById('Name').value
-    const playerNum = document.getElementById('PlayerNum').value
-    const form = document.getElementsByName('formClass')
-    return this.startGame(name, playerNum)
+    const form = document.getElementById('formId')
+    form.onsubmit = this.onLogin.bind(this)
+  }
+
+  onLogin(event) {
+    event.preventDefault()
+    const name = this.nameInput().value
+    const playerNum = parseInt(this.numberInput().value)
+    this._startGame(name, playerNum)
+  }
+
+  nameInput() {
+    return document.getElementById('Name')
+  }
+
+  numberInput() {
+    return document.getElementById('PlayerNum')
   }
 
   markup() {
-    return `<form action="#" method="post" name="formName" id="formId" class="formClass">
-      <div id="NameDiv">
-        <p>Enter Your Name:</p>
-        <input id="Name" name="InsertName">
-      </div>
-      <div id="PlayerNumDiv">
-        <p>Select the Number of Players:</p>
-        <input id="PlayerNum" type=number>
-      </div>
-      <input type="button" name="submit()" id="btn" value="Submit" onclick="return submit()"/>
+    return `<form id="formId">
+    <div id="NameDiv" class=".col-md-6 .col-md-offset-3">
+      <p>Enter Your Name:</p>
+      <input id="Name" name="InsertName">
+    </div>
+    <div id="PlayerNumDiv" class=".col-md-6 .col-md-offset-3">
+      <p>How Many Players to Play Against:</p>
+      <input id="PlayerNum" type="number">
+    </div>
+    <input type="submit" value="Submit"/>
     </form>`
   }
 }
-
-// <form id="myForm" class=".login-form" onsubmit="loggedIn">
-// <button type="submit" id="loggedIn" onclick="loggedIn()">Play</button>
